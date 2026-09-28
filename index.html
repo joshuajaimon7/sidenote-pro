@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SideNote Pro - Sticky Markdown Scratchpad for Every Website</title>
+  <meta name="description" content="Contextual domain-smart Markdown scratchpad for Google Chrome. Pin notes, code snippets, and research checklists to any website. 100% on-device.">
+  <link rel="icon" type="image/png" href="icons/icon48.png">
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: #121214;
+      --border: #242426;
+      --text: #ededed;
+      --text-muted: #8e8e93;
+      --accent: #ffffff;
+      --accent-text: #000000;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 20px;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: #1c1c1e;
+      border: 1px solid #3a3a3c;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-text);
+      border: 1px solid #ffffff;
+    }
+    .btn-primary:hover {
+      background: #e5e5ea;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: #1c1c1e;
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: #2c2c2e;
+    }
+    header.hero {
+      text-align: center;
+      padding: 80px 0 60px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #18181b;
+      border: 1px solid #27272a;
+      font-size: 12px;
+      font-weight: 600;
+      color: #a1a1aa;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    p.hero-sub {
+      font-size: 19px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: #71717a;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 60px 0;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #18181b;
+      border: 1px solid #27272a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .comparison-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin: 60px 0;
+    }
+    .comparison-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      color: #a1a1aa;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+    .check { color: #10b981; font-weight: 600; }
+    .cross { color: #ef4444; }
+    .faq-section {
+      margin: 60px 0;
+    }
+    .faq-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .faq-item h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .faq-item p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .cta-banner {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: var(--radius);
+      padding: 60px 24px;
+      text-align: center;
+      margin: 60px 0 80px;
+    }
+    .cta-banner h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .cta-banner p {
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 28px;
+      font-size: 16px;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0 48px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #71717a;
+    }
+    footer a { color: #a1a1aa; text-decoration: none; }
+    footer a:hover { color: #fff; }
+    @media (max-width: 768px) {
+      h1 { font-size: 36px; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+        </div>
+        <span>SideNote Pro</span>
+      </div>
+      <div class="nav-actions">
+        <a href="https://micro-software-lab.lemonsqueezy.com/checkout/buy/3dfdbeb4-d743-4fff-9328-c293507b80ab" class="btn btn-primary">Get Pro - $4.99</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="pill">Contextual Web Scratchpad</div>
+      <h1>Sticky Markdown Notes Attached to Any Website</h1>
+      <p class="hero-sub">Never lose your notes or context again. SideNote Pro automatically remembers your scratchpad per domain. Switch tabs, and your notes instantly adapt.</p>
+      <div class="hero-cta">
+        <a href="https://micro-software-lab.lemonsqueezy.com/checkout/buy/3dfdbeb4-d743-4fff-9328-c293507b80ab" class="btn btn-primary" style="padding: 14px 28px; font-size: 16px;">Get Lifetime Pro - $4.99</a>
+        <a href="demo-test.html" class="btn btn-secondary" style="padding: 14px 20px;">Try Test Sandbox</a>
+      </div>
+      <div class="hero-meta">One-time payment. Lifetime license. 100% private, on-device storage.</div>
+    </header>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <h3>Per-Domain Memory</h3>
+        <p>Keep separate, persistent notes for GitHub repos, Stripe dashboards, Jira tickets, and research papers automatically.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <h3>Right-Click Snippet Capture</h3>
+        <p>Highlight any text on any page and click "Save to SideNote". Automatically timestamps and quotes source URLs.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </div>
+        <h3>1-Click Markdown Export</h3>
+        <p>Export all your research notes directly as formatted .md files ready for Obsidian, Logseq, or Notion.</p>
+      </div>
+    </div>
+
+    <div class="comparison-section">
+      <h2>Why SideNote Pro?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>SideNote Pro</th>
+            <th>Generic Sticky Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Domain-Aware Memory</td>
+            <td class="check">Automatic per-domain context</td>
+            <td class="cross">Messy mixed list</td>
+          </tr>
+          <tr>
+            <td>Markdown & Live Preview</td>
+            <td class="check">Yes, full GFM formatting</td>
+            <td class="cross">Plain text only</td>
+          </tr>
+          <tr>
+            <td>Right-Click Quote Capture</td>
+            <td class="check">Yes, with source link & time</td>
+            <td class="cross">Manual copy-paste</td>
+          </tr>
+          <tr>
+            <td>Export to .md files</td>
+            <td class="check">1-Click instant export</td>
+            <td class="cross">No export support</td>
+          </tr>
+          <tr>
+            <td>Data Privacy</td>
+            <td class="check">100% On-device, zero cloud sync</td>
+            <td class="cross">Varies / cloud-bound</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4>Where are my notes stored?</h4>
+          <p>Exclusively inside Chrome's secure local storage on your machine. Nothing is ever sent to any remote server or third party.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Can I use it on intranet or local dev sites?</h4>
+          <p>Yes. SideNote Pro works on localhost, staging URLs, IP addresses, and private intranets.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How do I activate Pro?</h4>
+          <p>Enter the license key received after your $4.99 one-time purchase into the extension popup license box.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is this a subscription?</h4>
+          <p>No, it is a one-time purchase with lifetime access and free updates.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <h2>Never lose context while browsing</h2>
+      <p>Keep your thoughts, code snippets, and research notes right where they belong: attached to the website.</p>
+      <a href="https://micro-software-lab.lemonsqueezy.com/checkout/buy/3dfdbeb4-d743-4fff-9328-c293507b80ab" class="btn btn-primary" style="padding: 14px 32px; font-size: 16px;">Get SideNote Pro - $4.99</a>
+    </div>
+
+    <footer>
+      <div>&copy; 2026 Micro Software Lab. All rights reserved.</div>
+      <div>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

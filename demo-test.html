@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SideNote Pro - Interactive Test Sandbox</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0c;
+      color: #ededed;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      padding: 40px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 1px solid #242426;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    p { color: #8e8e93; font-size: 14px; }
+    .card {
+      background: #121214;
+      border: 1px solid #242426;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    h3 { font-size: 17px; font-weight: 600; margin-bottom: 12px; color: #fff; }
+    .sample-text {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      color: #d4d4d8;
+      user-select: text;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #242426;
+      color: #a1a1aa;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SideNote Pro Sandbox</h1>
+    <p>Test domain-level note memory, quick snippet capture, markdown formatting, and local storage sync.</p>
+  </header>
+
+  <div class="card">
+    <span class="badge">Test Step 1: Per-Domain Context</span>
+    <h3>Domain Sticky Memory</h3>
+    <p>Open the SideNote Pro popup right now. It automatically detects this page's domain and attaches your notes specifically to this site. If you close Chrome or restart your computer, your notes remain safe and saved.</p>
+  </div>
+
+  <div class="card">
+    <span class="badge">Test Step 2: Context Menu Quick Capture</span>
+    <h3>Highlight & Right-Click Snippet Capture</h3>
+    <p class="sample-text">
+      Select any portion of this text right here, right-click, and choose "Save selection to SideNote". The extension will automatically format it with quote markdown blockquotes, timestamp, and page link!
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="badge">Test Step 3: Markdown & Live Preview</span>
+    <h3>Checklists & Code Blocks</h3>
+    <p>In the popup, try clicking the Checklist button <code>- [ ]</code> or Code button <code>```</code>. Toggle to <strong>Preview</strong> mode to view rendered markdown in real-time.</p>
+  </div>
+</body>
+</html>
